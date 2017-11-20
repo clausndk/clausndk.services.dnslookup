@@ -14,12 +14,13 @@ namespace clausndk.services.dnslookup
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
-        }
-
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+            var host = new WebHostBuilder()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseKestrel()
                 .UseStartup<Startup>()
                 .Build();
+
+            host.Run();
+        }
     }
 }
